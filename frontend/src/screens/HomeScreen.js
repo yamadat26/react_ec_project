@@ -5,6 +5,7 @@ import Product from '../componets/Product'
 import Message from '../componets/Message'
 import Loader from '../componets/Loader'
 import Paginate from '../componets/Paginate'
+import ProductCarousel from '../componets/ProductCarousel'
 import { listProducts } from '../actions/productActions'
 
 
@@ -25,6 +26,7 @@ const HomeScreen = ({ match }) => {
   
   return (
     <>
+    {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />
