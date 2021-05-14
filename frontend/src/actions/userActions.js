@@ -26,6 +26,7 @@ import {
 } from "../constants/userConstants"
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 import axios from 'axios'
+import { CART_CLEAR_ITEM } from "../constants/cartConstants"
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -69,7 +70,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET })
   dispatch({ type: ORDER_LIST_MY_RESET })
   dispatch({ type: USER_LIST_RESET })
-  // clear cartitem 
+  dispatch({ type: CART_CLEAR_ITEM })
 }
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -163,7 +164,12 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data
     })
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data
+    })
      
+    localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
